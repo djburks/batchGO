@@ -25,7 +25,7 @@ clusters <- readLines(conn)
 
 # Scan the universe file, and make a vector.
 
-uni <- scan("Universe.txt",what=character(),sep="\t")
+uni <- scan(clusterfile,what=character(),sep="\t")
 
 # Work through the clusters one at a time, generating topGO results.
 # Unlist and split the lines into a character vector.
@@ -34,8 +34,8 @@ for (i in 1:length(clusters)) {
 	clusterlist <- clusters[i]
 	clusterlist <- unlist(strsplit(clusterlist,split="\t"))
 	
-	if (length(clusterlist) > 5000) next
-	if (length(clusterlist) < 25) next
+	#if (length(clusterlist) > 5000) next
+	if (length(clusterlist) < 5) next
 
 # Make a named vector between the cluster list and the universe.
 
@@ -77,9 +77,9 @@ for (i in 1:length(clusters)) {
 	graphname <- paste("cluster",i,"BP",sep="_")
 	graphname2 <- paste("cluster",i,"MF",sep="_")
 	graphname3 <- paste("cluster",i,"CC",sep="_")
-	#printGraph(GOdata,resultFisher,firstSigNodes=5,fn.prefix=graphname,useInfo='all',pdfSW=FALSE)
-	#printGraph(GOdata2,resultFisher2,firstSigNodes=5,fn.prefix=graphname2,useInfo='all',pdfSW=FALSE)
-	#printGraph(GOdata3,resultFisher3,firstSigNodes=5,fn.prefix=graphname3,useInfo='all',pdfSW=FALSE)
+	printGraph(GOdata,resultFisher,firstSigNodes=5,fn.prefix=graphname,useInfo='all',pdfSW=FALSE)
+	printGraph(GOdata2,resultFisher2,firstSigNodes=5,fn.prefix=graphname2,useInfo='all',pdfSW=FALSE)
+	printGraph(GOdata3,resultFisher3,firstSigNodes=5,fn.prefix=graphname3,useInfo='all',pdfSW=FALSE)
 
 # Close Loop
 
